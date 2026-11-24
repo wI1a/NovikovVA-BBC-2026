@@ -1,4 +1,25 @@
-from text_utils import normalize_text
+def normalize_text(text):
+    s = ""
+
+    for c in text:
+        if c.isalnum() or c.isspace() or c in ".,!?:;-":
+            s += c
+        else:
+            s += " "
+
+    s = " ".join(s.split())
+
+    for p in ".,!?:;":
+        s = s.replace(" " + p, p)
+
+    r = ""
+
+    for c in s:
+        if c in ".,!?:;" and r.endswith(c):
+            continue
+        r += c
+
+    return r.strip().capitalize()
 
 
 def run():
